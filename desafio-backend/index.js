@@ -1,7 +1,7 @@
 import orders from "./orders.js";
-import { listCustomerNames, findOrderById, filterDeliveredOrders, allOrdersDelivered,
-    revenuePerOrder, totalRevenue, objectToJson, jsonToObject,
-    listCustomerCallback, totalRevenueCallback, filterPendingOrders
+import { listCustomerNames, findOrderById, filterDeliveredOrders, allOrdersDelivered, revenuePerOrder, totalRevenue,
+    objectToJson, jsonToObject, listCustomerCallback, totalRevenueCallback, filterPendingOrders,
+    mostSoldProduct
 } from "./reports.js";
 
 console.log("- - - - - - - - - - - - - - - - - - - - - - - -")
@@ -41,3 +41,6 @@ console.log(totalRevenueCallback(orders), "\n");
 
 console.log("Desafio #9.3 - Resultados encontrados:");
 console.log(filterPendingOrders(orders), "\n");
+
+console.log("EXTRA #1 - Resultados encontrados:");
+console.log(mostSoldProduct(orders), "\n");

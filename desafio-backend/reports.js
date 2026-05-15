@@ -4,21 +4,16 @@ import orders from "./orders.js";
 export const listCustomerNames = (orders) => orders.map(order => order.cliente);
 
 // Desafio #2 — Buscar pedido por ID
-export const findOrderById = (ordersList, idNumber) => orders.find(order => order.id === idNumber);
+export const findOrderById = (orders, idNumber) => orders.find(order => order.id === idNumber);
 
 // Desafio #3 — Filtrar pedidos entregues
-export const filterDeliveredOrders = (orderList) => orders.filter(order => order.status === "entregue");
+export const filterDeliveredOrders = (orders) => orders.filter(order => order.status === "entregue");
 
 // Desafio #4 — Verificar status geral dos pedidos
-export const allOrdersDelivered = (orderList) => orders.every(order => order.status ==="entregue");
+export const allOrdersDelivered = (orders) => orders.every(order => order.status ==="entregue");
 
 // Desafio #5 — Calcular total de cada pedido
-// export function revenuePerOrder(orderList) {
-//     return orders.map((order) => {
-//         const total = order.itens.reduce((acc, item) => acc + (item.preco * item.quantidade), 0);
-//         return total;
-// })}
-export function revenuePerOrder(orderList) {
+export function revenuePerOrder(orders) {
         return orders.map(order => {
         const total = order.itens.reduce((acc, item) => acc + (item.preco * item.quantidade), 0);
         return {cliente: order.cliente, total: total};
@@ -27,19 +22,14 @@ export function revenuePerOrder(orderList) {
 
 // Desafio #6 — Calcular faturamento total
 export function totalRevenue() {
-    return orders.reduce((acc, order) => {
+    return orders.reduce((revenue, order) => {
         const total = order.itens.reduce((acc, item) => acc + (item.preco * item.quantidade), 0);
-        return acc + total;
+        return revenue + total;
     }, 0);
 }
-// export function totalRevenue(orders) {
-//     return orders.reduce(
-//         (revenue, order) => revenue + revenuePerOrder(order)
-//         , 0)
-// }
 
 // Desafio #7 — Converter objeto para JSON
-export const objectToJson = (ordersList) => JSON.stringify(ordersList, null, 2);
+export const objectToJson = (orders) => JSON.stringify(orders, null, 2);
 
 // Desafio #8 — Converter JSON novamente para objeto
 export const jsonToObject = (json) => JSON.parse(json);
@@ -50,6 +40,31 @@ export const listCustomerCallback = (ordersList) => listCustomerNames(ordersList
 // 9.2 calcular faturamento
 export const totalRevenueCallback = (ordersList) => totalRevenue(ordersList);
 // 9.3 filtrar pedidos pendentes
-export function filterPendingOrders(ordersList) {
-    return orders.filter(order => order.status === "pendente");
+export const filterPendingOrders = (ordersList) => ordersList.filter(order => order.status === "pendente");
+
+// EXTRA #1. Qual produto foi mais vendido ?
+export function mostSoldProduct(orders) {
+    const productSales = {};
+    let mostSold = null;
+    let maxSales = 0;
+
+    orders.forEach(order => {
+        order.itens.forEach(item => {
+            if (!productSales[item.produto]) {
+                productSales[item.produto] = 0;
+            }
+            productSales[item.produto] += item.quantidade;
+        });
+        for (const product in productSales) {
+            if (productSales[product] > maxSales) {
+                mostSold = product;
+                maxSales = productSales[product];
+            } else if (productSales[product] === maxSales) {
+                mostSold = `${mostSold} e ${product}`;
+            }
+        }
+    });
+    const uniqueBest = [...new Set(mostSold.split(" e "))];
+    return { produto: uniqueBest.join(" / "), quantidade: maxSales };
 }
+console.log(mostSoldProduct(orders));
