@@ -38,7 +38,7 @@ function verificarAcesso(usuario, logado) {
     }
     return `Acesso negado. Faça login.`;
 }
-console.log('=== 2.3 Boolean ===');
+console.log('\n=== 2.3 Boolean ===');
 console.log(verificarAcesso("Ana", temPermissao));
 console.log(verificarAcesso("José", estaLogado));
 //2.4 NULL e UNDEFINED
@@ -56,31 +56,35 @@ console.log('Buscar id=1: ', buscarUsuario(1));
 console.log('Buscar id=2: ', buscarUsuario(2));
 //2.4 ANY
 // any desativa completamente a verificação de tipos
+console.log('\n=== 2.5 Any ===');
 let dadosExternos = 'pode ser qualquer coisa';
 dadosExternos = 42;
+console.log('Dados Externos: ', dadosExternos);
 dadosExternos = true;
+console.log('Dados Externos: ', dadosExternos);
 dadosExternos = { nome: 'Davi' };
-console.log('\n=== 2.5 Any ===');
 console.log('Dados Externos: ', dadosExternos);
 //2.4 UNKNOWN
 //unknown aceitar qualquer valor, mas exige uma verificação antes de usar
 //Use quando não souber o tipo
 let respostaApi = JSON.parse('{"status": 200}');
 // Erro - sem verificação
-//console.log(respostaApi.status)
-console.log('\n=== 2.5 Unknow ===');
+// console.log(respostaApi.status)
+console.log('\n=== 2.6 Unknow ===');
 if (typeof respostaApi === 'object' && respostaApi !== null) {
     console.log("Resposta API: ", respostaApi);
 }
 function processarEntrada(valor) {
     if (typeof valor === "string")
-        return `Texto: ${valor}`;
+        return `Texto: ${valor} | ${typeof valor}`;
     if (typeof valor === "number")
-        return `Número: ${valor}`;
+        return `Número: ${valor} | ${typeof valor}`;
     if (typeof valor === "boolean")
-        return `Boolean: ${valor}`;
+        return `Boolean: ${valor} | ${typeof valor}`;
     return `Tipo Desconhecido`;
 }
+console.log(' ');
 console.log(processarEntrada(`Typescript`));
 console.log(processarEntrada(2026));
 console.log(processarEntrada(true));
+console.log(' ');
