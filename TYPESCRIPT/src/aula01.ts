@@ -12,8 +12,8 @@ console.log(testeUnion)
 console.log(' ')
 console.log('=== ITERSERCTION TYPE / símbolo: & (e comercial) ===')
 type Pessoa = { nome: string, cpf: string}
-type Funcionario = { cargo: string, salario: number}
-type Colaborador = Pessoa & Funcionario
+type Funcionario001 = { cargo: string, salario: number}
+type Colaborador = Pessoa & Funcionario001
 const colaborador001: Colaborador = {
     nome: 'Ciclano',
     cpf: '001.002.003-04',
